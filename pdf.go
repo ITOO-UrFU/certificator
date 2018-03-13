@@ -15,10 +15,10 @@ func main() {
 	pdf.AddPage()
 	tr := pdf.UnicodeTranslatorFromDescriptor("cp1251")
 
-	pdf.Image("images/background.png", float64(0), float64(0), float64(297), float64(210), false, "", 0, "")
-	pdf.Image("images/signature.png", float64(0), float64(0), float64(297), float64(210), false, "", 0, "")
-	//pdf.Image("images/template-03.png", float64(0), float64(0), float64(297), float64(210), false, "", 0, "")
-	//pdf.Line(17, 0, 17, 300)
+	pdf.Image("images/template_L_background.png", 0, 0, 297, 210, false, "", 0, "")
+	pdf.Image("images/template_L_stamp.png", 0, 0, 297, 210, false, "", 0, "")
+	pdf.Image("images/template_L_signature.png", 0, 0, 297, 210, false, "", 0, "")
+
 	pdf.SetFont("PFBeauSansPro-Light", "", 28)
 	pdf.SetTextColor(111, 112, 114)
 	pdf.SetXY(17, 82.7)
@@ -57,8 +57,16 @@ func main() {
 	pdf.SetXY(217, 188.714)
 	pdf.Cellf(0, 0, tr("Третьяков Василий Сергеевич"))
 
-	//x, y := pdf.GetPageSize()
-	//pdf.AddPageFormat("P", gofpdf.SizeType{y, x})
+	pdf.AddPageFormat("P", gofpdf.SizeType{210, 297})
+	pdf.Image("images/template_P_background_first.png", 0, 0, 210, 297, false, "", 0, "")
+	pdf.Image("images/template_P_example_first.png", 0, 0, 210, 297, false, "", 0, "")
+
+	pdf.AddPageFormat("P", gofpdf.SizeType{210, 297})
+	pdf.Image("images/template_P_background_last.png", 0, 0, 210, 297, false, "", 0, "")
+	pdf.Image("images/template_P_example_last.png", 0, 0, 210, 297, false, "", 0, "")
+	pdf.Image("images/template_P_stamp.png", 0, 0, 210, 297, false, "", 0, "")
+	pdf.Image("images/template_P_signature.png", 0, 0, 210, 297, false, "", 0, "")
+
 	err := pdf.OutputFileAndClose("results/pdf.pdf")
 	if err != nil {
 		log.Println(err)
