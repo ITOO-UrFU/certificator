@@ -18,6 +18,7 @@ func main() {
 	pdf.Image("images/background.png", float64(0), float64(0), float64(297), float64(210), false, "", 0, "")
 	pdf.Image("images/signature.png", float64(0), float64(0), float64(297), float64(210), false, "", 0, "")
 	pdf.Image("images/body.png", float64(0), float64(0), float64(297), float64(210), false, "", 0, "")
+	pdf.Line(17, 0, 17, 300)
 	pdf.SetFont("PFBeauSansPro-Light", "", 28)
 	pdf.SetXY(17, 84.5)
 	pdf.Cellf(0, 0, tr("СЕРТИФИКАТ"))
@@ -32,6 +33,9 @@ func main() {
 	pdf.SetFont("PFBeauSansPro-Light", "", 14)
 	pdf.SetXY(17, 167)
 	pdf.Cellf(0, 0, tr("3 зачетные единицы"))
+
+	x, y := pdf.GetPageSize()
+	pdf.AddPageFormat("P", gofpdf.SizeType{y, x})
 	err := pdf.OutputFileAndClose("results/pdf.pdf")
 	if err != nil {
 		log.Println(err)
