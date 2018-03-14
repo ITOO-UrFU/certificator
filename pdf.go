@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+
 	pdf := gofpdf.New("L", "mm", "A4", "")
 	pdf.AddFont("PFBeauSansPro-Light", "", "./fonts/PFBeauSansPro-Light.json")
 	pdf.AddFont("PFBeauSansPro-Book", "", "./fonts/PFBeauSansPro-Book.json")
@@ -48,10 +49,10 @@ func main() {
 	pdf.SetFont("PFBeauSansPro-book", "", 29)
 	pdf.SetXY(17, 120.161)
 	pdf.MultiCell(180, 12, tr(strings.ToUpper("Начертательная геометрия \nи инженерная графика")), "", "", false)
+
 	pdf.SetFont("PFBeauSansPro-Light", "", 14)
 	pdf.SetXY(17, 149.952)
 	pdf.Cellf(0, 0, tr("3 зачетные единицы"))
-	pdf.SetFont("PFBeauSansPro-Light", "", 14)
 	pdf.SetXY(17, 188.714)
 	pdf.Cellf(0, 0, "https://openedu.urfu.ru/certificates/")
 	pdf.SetXY(217, 188.714)
@@ -70,5 +71,6 @@ func main() {
 	err := pdf.OutputFileAndClose("results/pdf.pdf")
 	if err != nil {
 		log.Println(err)
+
 	}
 }
